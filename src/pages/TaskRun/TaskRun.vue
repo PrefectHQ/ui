@@ -234,38 +234,67 @@ export default {
           @change="saveTaskRunName"
         />
       </span>
-      <BreadCrumbs
+      <span
         slot="breadcrumbs"
-        :crumbs="[
-          {
-            route: {
-              name: 'project',
-              params: { id: taskRun.flow_run.flow.project.id }
-            },
-            text: taskRun.flow_run.flow.project.name
-          },
-          {
-            route: {
-              name: 'flow',
-              params: { id: taskRun.flow_run.flow.flow_group_id }
-            },
-            text: taskRun.flow_run.flow.name
-          },
-          {
-            route: {
-              name: 'flow-run',
-              params: { id: taskRun.flow_run.id }
-            },
-            text: taskRun.flow_run.name
-          }
-        ]"
         :style="
-          $vuetify.breakpoint.smAndDown && {
-            display: 'inline',
-            'font-size': '0.875rem'
-          }
+          loading !== 0
+            ? {
+                display: 'block',
+                height: '21px',
+                overflow: 'hidden',
+                width: '500px'
+              }
+            : $vuetify.breakpoint.smAndDown && {
+                display: 'inline',
+                'font-size': '0.875rem'
+              }
         "
-      ></BreadCrumbs>
+      >
+        <span v-if="!taskRun.flow_run.flow.project" class="text-overline"
+          >no project</span
+        >
+        <BreadCrumbs
+          v-if="taskRun && loading === 0"
+          :crumbs="[
+            {
+              route: {
+                name: 'project',
+                params: {
+                  id:
+                    taskRun.flow_run.flow.project &&
+                    taskRun.flow_run.flow.project.id
+                }
+              },
+              text:
+                taskRun.flow_run.flow.project &&
+                taskRun.flow_run.flow.project.name
+            },
+            {
+              route: {
+                name: 'flow',
+                params: {
+                  id: taskRun.flow_run.flow.flow_group_id
+                }
+              },
+              text: taskRun.flow_run.flow.name
+            },
+            {
+              route: {
+                name: 'flow-run',
+                params: { id: taskRun.flow_run.id }
+              },
+              text: taskRun.flow_run.name
+            }
+          ]"
+          :style="
+            $vuetify.breakpoint.smAndDown && {
+              display: 'inline',
+              'font-size': '0.875rem'
+            }
+          "
+        ></BreadCrumbs>
+        <v-skeleton-loader v-else type="text" />
+      </span>
 
       <Actions slot="page-actions" style="height: 55px;" :task-run="taskRun" />
       <span slot="tabs" style="width: 100%;">

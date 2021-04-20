@@ -73,7 +73,7 @@ export default {
     UpgradeUsageTile
   },
   async beforeRouteLeave(to, from, next) {
-    if (to.name == 'project') {
+    if (to.name == 'project' || to.name == 'no-project') {
       await this.activateProject(to.params.id)
     } else {
       this.resetActiveData()
@@ -174,7 +174,7 @@ export default {
     }
   },
   async beforeMount() {
-    if (this.$route.name == 'project') {
+    if (this.$route.name == 'project' || this.$route.name == 'no-project') {
       await this.activateProject(this.$route.params.id)
     }
   },
@@ -185,14 +185,19 @@ export default {
     ...mapActions('data', ['activateProject', 'resetActiveData']),
     handleAgentDetailsClick() {
       this.$router.push({
-        name: this.projectId ? 'project' : 'dashboard',
+        name: this.projectId
+          ? 'project'
+          : this.projectId === null
+          ? 'no-project'
+          : 'dashboard',
         params: { tenant: this.tenant.slug, id: this.projectId },
         query: { agents: null }
       })
     },
     handleProjectSelect(val) {
       this.projectId = val
-      if (this.projectId?.length > 0) this.activateProject(this.projectId)
+      if (this.projectId?.length > 0 || this.projectId === null)
+        this.activateProject(this.projectId)
     },
     getTab() {
       if ('flows' in this.$route.query) return 'flows'
@@ -228,8 +233,8 @@ export default {
 <template>
   <v-sheet color="appBackground">
     <SubPageNav
-      :icon="projectId && project ? 'pi-project' : 'view_quilt'"
-      :page-type="projectId && project ? 'Project' : 'Dashboard'"
+      :icon="project ? 'pi-project' : 'view_quilt'"
+      :page-type="project ? 'Project' : 'Dashboard'"
     >
       <span
         slot="page-title"
@@ -246,7 +251,7 @@ export default {
         "
       >
         <span v-if="loading === 0">
-          {{ projectId && project ? project.name : tenant.name }}
+          {{ project ? project.name : tenant.name }}
         </span>
         <span v-else>
           <v-skeleton-loader type="heading" tile></v-skeleton-loader>
@@ -254,7 +259,7 @@ export default {
       </span>
 
       <span
-        v-if="projectId && project"
+        v-if="project"
         slot="breadcrumbs"
         :style="
           $vuetify.breakpoint.smAndDown && {

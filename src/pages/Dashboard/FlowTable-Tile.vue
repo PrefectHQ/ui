@@ -22,7 +22,7 @@ const serverHeaders = [
   },
   {
     text: 'Project',
-    value: 'project.name',
+    value: 'project',
     sortable: false,
     width: '15%'
   },
@@ -120,6 +120,10 @@ export default {
       if (!this.search) return null
       return `%${this.search}%`
     },
+    nullProject() {
+      if (!this.search) return null
+      return this.search.toLowerCase() == 'no project'
+    },
     validUUID() {
       if (!this.search) return false
 
@@ -189,6 +193,19 @@ export default {
           { project: { name: { _ilike: this.searchFormatted } } }
         ]
 
+        if (this.nullProject) {
+          searchParams.pop()
+          searchParams.push({ project_id: { _is_null: true } })
+          return {
+            limit: this.limit,
+            offset: this.limit * (this.page - 1),
+            orderBy: sortBy,
+            searchParams: {
+              _and: [...searchParams]
+            }
+          }
+        }
+
         if (this.validUUID) {
           orParams.push({ id: { _eq: this.search } })
         }
@@ -228,6 +245,16 @@ export default {
           },
           { project: { name: { _ilike: this.searchFormatted } } }
         ]
+
+        if (this.nullProject) {
+          searchParams.pop()
+          searchParams.push({ project_id: { _is_null: true } })
+          return {
+            searchParams: {
+              _and: [...searchParams]
+            }
+          }
+        }
 
         if (this.validUUID) {
           orParams.push({ id: { _eq: this.search } })
@@ -332,9 +359,10 @@ export default {
           </truncate>
         </template>
 
-        <template #item.project.name="{ item }">
-          <truncate :content="item.project.name">
+        <template #item.project="{ item }">
+          <truncate :content="item.project && item.project.name">
             <router-link
+              v-if="item.project"
               class="link"
               :to="{
                 name: 'project',
@@ -343,6 +371,7 @@ export default {
             >
               <span>{{ item.project.name }}</span>
             </router-link>
+            <span v-else class="text-overline">no project</span>
           </truncate>
         </template>
 

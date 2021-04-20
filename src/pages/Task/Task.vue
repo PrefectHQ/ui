@@ -196,15 +196,16 @@ export default {
               }
         "
       >
+        <span v-if="!task.flow.project" class="text-overline">no project</span>
         <BreadCrumbs
           v-if="task && loading === 0"
           :crumbs="[
             {
               route: {
                 name: 'project',
-                params: { id: task.flow.project.id }
+                params: { id: task.flow.project && task.flow.project.id }
               },
-              text: task.flow.project.name
+              text: task.flow.project && task.flow.project.name
             },
             {
               route: {

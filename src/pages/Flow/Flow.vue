@@ -281,7 +281,7 @@ export default {
         "
       >
         <BreadCrumbs
-          v-if="flowGroup"
+          v-if="flowGroup && project"
           slot="breadcrumbs"
           :crumbs="[
             {
@@ -290,6 +290,11 @@ export default {
             }
           ]"
         ></BreadCrumbs>
+        <span v-else-if="!project" class="text-overline"
+          >no project<v-icon small class="arrow-position">
+            chevron_right
+          </v-icon></span
+        >
         <v-skeleton-loader v-else type="text" />
       </span>
 

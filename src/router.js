@@ -40,6 +40,15 @@ export const routes = [
     beforeEnter: multiguard([authNavGuard, tenantNavGuard])
   },
   {
+    name: 'no-project',
+    path: '/:tenant?/project/no-project',
+    component: () =>
+      import(
+        /* webpackChunkName: "no-project" */ '@/pages/Dashboard/Dashboard.vue'
+      ),
+    beforeEnter: multiguard([authNavGuard, tenantNavGuard])
+  },
+  {
     name: 'flow',
     path: '/:tenant?/flow/:id',
     component: () =>

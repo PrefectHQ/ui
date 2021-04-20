@@ -32,6 +32,7 @@ export default {
       let fullySorted = [...this.projects].sort((a, b) =>
         a.name.localeCompare(b.name, undefined, { ignorePunctuation: true })
       )
+      fullySorted.unshift({ name: 'No Project', id: 'no_project' })
       fullySorted.unshift({ name: 'All Projects', id: null })
       fullySorted.unshift({ name: 'New Project', id: 'new_project' })
       return fullySorted
@@ -41,6 +42,18 @@ export default {
     projectSelect(val) {
       if (val == 'new_project') {
         this.newProjectDialog = true
+        return
+      }
+      if (val == 'no_project') {
+        this.projectId = null
+        this.$emit('project-select', this.projectId)
+        this.$router
+          .push({
+            name: 'no-project',
+            params: { ...this.$route.params, id: null },
+            query: { ...this.$route.query }
+          })
+          .catch(e => e)
         return
       }
       if (typeof val === 'object') {

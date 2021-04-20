@@ -260,14 +260,17 @@ export default {
           }
         "
       >
+        <span v-if="!flowRun.flow.project" class="text-overline"
+          >no project</span
+        >
         <BreadCrumbs
           :crumbs="[
             {
               route: {
                 name: 'project',
-                params: { id: flowRun.flow.project.id }
+                params: { id: flowRun.flow.project && flowRun.flow.project.id }
               },
-              text: flowRun.flow.project.name
+              text: flowRun.flow.project && flowRun.flow.project.name
             },
             {
               route: {
