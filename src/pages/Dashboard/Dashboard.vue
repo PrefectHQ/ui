@@ -14,6 +14,7 @@ import SummaryTile from '@/pages/Dashboard/Summary-Tile'
 import UpcomingRunsTile from '@/pages/Dashboard/UpcomingRuns-Tile'
 import UpgradeUsageTile from '@/pages/Dashboard/UsageTiles/UpgradeUsage-Tile'
 import SubPageNav from '@/layouts/SubPageNav'
+import FlowRecentUpdate from '@/pages/Dashboard/FlowRecentUpdate'
 import { mapGetters, mapActions } from 'vuex'
 import gql from 'graphql-tag'
 
@@ -57,6 +58,7 @@ export default {
     AgentsTile,
     BreadCrumbs,
     FailedFlowsTile,
+    FlowRecentUpdate,
     FlowTableTile,
     InProgressTile,
     NavTabBar,
@@ -105,7 +107,8 @@ export default {
       numberOfTiles: 10,
       projectId: this.$route.params.id,
       refreshTimeout: null,
-      tab: this.getTab()
+      tab: this.getTab(),
+      recentlyUpdatedFlow: null
     }
   },
   computed: {
@@ -292,6 +295,14 @@ export default {
         reverse-transition="tab-fade"
       >
         <div class="tile-grid my-4">
+          <div
+            v-show="!!recentlyUpdatedFlow"
+            class="tile-container span-full span-row-1"
+          >
+            <FlowRecentUpdate
+              @recentlyUpdatedFlow="recentlyUpdatedFlow = $event"
+            />
+          </div>
           <v-skeleton-loader
             :loading="loadedTiles < 7"
             type="image"
@@ -446,7 +457,7 @@ export default {
 
 <style lang="scss" scoped>
 $cellsize: 412px;
-$rowsize: 153px;
+$rowsize: 1px;
 $guttersize: 24px;
 $spans: 1, 2, 3, 4, 5, 6;
 
