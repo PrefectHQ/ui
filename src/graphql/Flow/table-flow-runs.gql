@@ -6,12 +6,14 @@ query TableFlowRuns(
   $flow_group_id: uuid
   $flow_id: uuid
   $state: [String!]
+  $jsonB: jsonb
 ) {
   flow_run(
     where: {
       flow: { flow_group_id: { _eq: $flow_group_id }, id: { _eq: $flow_id } }
       name: { _ilike: $name }
       state: { _in: $state, _neq: "Scheduled" }
+      parameters: {_contains: $jsonB}
     }
     order_by: $orderBy
     limit: $limit
