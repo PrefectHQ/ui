@@ -54,7 +54,7 @@
     "velocity-animate": ">=1.5.2",
     "vue": "^2.6.12",
     "vue-apollo": "^3.0.7",
-    "vue-code-highlight": "^0.7.6",
+    "vue-code-highlight": "^0.7.8",
     "vue-codemirror": ">=4.0.6",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.5.1",
