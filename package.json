@@ -16,7 +16,7 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.14.0",
     "@fortawesome/fontawesome-pro": "^5.15.3",
-    "@okta/okta-auth-js": "^4.8.0",
+    "@okta/okta-auth-js": "^5.2.2",
     "apollo-link-batch-http": "^1.2.14",
     "codemirror": "^5.60.0",
     "cronstrue": "^1.110.0",
