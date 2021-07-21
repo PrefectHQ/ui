@@ -4,7 +4,7 @@
 
 ### Features and Improvements
 
-- None
+- Add Automations tab to Flow pages - [#941](https://github.com/PrefectHQ/ui/pull/941)
 
 ### Bugfixes
 

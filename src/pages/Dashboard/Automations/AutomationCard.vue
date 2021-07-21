@@ -280,7 +280,8 @@ export default {
   />
   <v-card
     v-else-if="showHook"
-    class="hover-card text-h6"
+    class="text-h6"
+    :class="canEdit ? 'hover-card' : 'view-card'"
     outlined
     @click="editHook"
   >
@@ -411,5 +412,9 @@ export default {
     box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%),
       0 1px 10px 0 rgb(0 0 0 / 12%) !important;
   }
+}
+.view-card {
+  cursor: default;
+  pointer-events: none;
 }
 </style>

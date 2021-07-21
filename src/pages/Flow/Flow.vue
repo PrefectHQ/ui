@@ -9,6 +9,7 @@ import FlowRunHeartbeatTile from '@/pages/Flow/FlowRunHeartbeat-Tile'
 import FlowRunTableTile from '@/pages/Flow/FlowRunTable-Tile'
 import RunTiles from '@/pages/Flow/Run'
 import SchematicTile from '@/pages/Flow/Schematic-Tile'
+import AutomationsTile from '@/pages/Flow/Automations-Tile'
 import Settings from '@/pages/Flow/Settings'
 import SubPageNav from '@/layouts/SubPageNav'
 import SummaryTile from '@/pages/Flow/Summary-Tile'
@@ -29,6 +30,7 @@ export default {
   },
   components: {
     Actions,
+    AutomationsTile,
     BreadCrumbs,
     DetailsTile,
     ErrorsTile,
@@ -90,6 +92,11 @@ export default {
           name: 'Schematic',
           target: 'schematic',
           icon: 'pi-schematic'
+        },
+        {
+          name: 'Automations',
+          target: 'automations',
+          icon: 'fad fa-random'
         },
         // {
         //   name: 'Versions',
@@ -178,6 +185,9 @@ export default {
         case 'versions':
           query = 'versions'
           break
+        case 'automations':
+          query = 'automations'
+          break
         case 'run':
           query = 'run'
           break
@@ -236,7 +246,7 @@ export default {
 </script>
 
 <template>
-  <v-sheet  color="appBackground">
+  <v-sheet color="appBackground">
     <SubPageNav icon="pi-flow" page-type="Flow">
       <span
         slot="page-title"
@@ -405,6 +415,16 @@ export default {
       </v-tab-item>
 
       <v-tab-item
+        value="automations"
+        transition="tab-fade"
+        reverse-transition="tab-fade"
+      >
+        <TileLayoutFull>
+          <AutomationsTile slot="row-2-tile" :flow="selectedFlow" />
+        </TileLayoutFull>
+      </v-tab-item>
+
+      <v-tab-item
         value="description"
         transition="tab-fade"
         reverse-transition="tab-fade"
@@ -480,6 +500,11 @@ export default {
       <v-btn :input-value="tab == 'schematic'" @click="tab = 'schematic'">
         Schematic
         <v-icon>pi-schematic</v-icon>
+      </v-btn>
+
+      <v-btn :input-value="tab == 'automations'" @click="tab = 'automations'">
+        Automations
+        <v-icon>fad fa-random</v-icon>
       </v-btn>
 
       <v-btn :input-value="tab == 'versions'" @click="tab = 'description'">
