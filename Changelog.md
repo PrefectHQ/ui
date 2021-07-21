@@ -4,7 +4,7 @@
 
 ### Features and Improvements
 
-- None
+- Add log rocket session url to support requests - [#954](https://github.com/PrefectHQ/ui/pull/954)
 
 ### Bugfixes
 

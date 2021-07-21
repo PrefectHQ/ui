@@ -36,6 +36,16 @@ export default {
     },
     mdScreen() {
       return this.$vuetify?.breakpoint?.mdAndUp
+    },
+    messageWithLogRocketSession() {
+      let url = ''
+      LogRocket.getSessionURL(sessionURL => {
+        url = sessionURL
+      })
+      return this.selectedCategory === 'I need help' ||
+        this.selectedCategory === "I've found a bug"
+        ? `${this.message} Relevant LogRocket URL: ${url}`
+        : this.message
     }
   },
   methods: {
@@ -55,7 +65,7 @@ export default {
           mutation: require('@/graphql/support/send-feedback.gql'),
           variables: {
             type: this.selectedCategory,
-            message: this.message
+            message: this.messageWithLogRocketSession
           }
         })
         this.success = data?.send_feedback?.success
