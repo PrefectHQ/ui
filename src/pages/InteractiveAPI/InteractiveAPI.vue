@@ -40,6 +40,10 @@ query { hello }
         'task_tag_usage',
         'mapped_children',
         'permissions_info',
+        'secretNames',
+        'secret_names',
+        'secretValue',
+        'secret_value',
         'users'
       ]
     }

@@ -8,7 +8,7 @@
 
 ### Bugfixes
 
-- None
+- Add secret name and value routes to limit and offset exceptions - [#955](https://github.com/PrefectHQ/ui/pull/955)
 
 ## 2021-07-21
 
