@@ -13,6 +13,7 @@ import SchematicTile from '@/pages/FlowRun/Schematic-Tile'
 import SubPageNav from '@/layouts/SubPageNav'
 import TaskRunHeartbeatTile from '@/pages/FlowRun/TaskRunHeartbeat-Tile'
 import TaskRunTableTile from '@/pages/FlowRun/TaskRunTable-Tile'
+import RunConfigTile from '@/pages/FlowRun/Run-Config-Tile'
 import TileLayout from '@/layouts/TileLayout'
 import TileLayoutFull from '@/layouts/TileLayout-Full'
 import { parser } from '@/utils/markdownParser'
@@ -45,6 +46,7 @@ export default {
     TimelineTile,
     LogsCard,
     NavTabBar,
+    RunConfigTile,
     SchematicTile,
     SubPageNav,
     TaskRunHeartbeatTile,
@@ -73,6 +75,11 @@ export default {
           name: 'Logs',
           target: 'logs',
           icon: 'format_align_left'
+        },
+        {
+          name: 'Run Config',
+          target: 'run_config',
+          icon: 'fas fa-cogs'
         },
         {
           name: 'Artifacts',
@@ -376,6 +383,15 @@ export default {
 
       <v-tab-item
         class="tab-full-height"
+        value="run_config"
+        transition="tab-fade"
+        reverse-transition="tab-fade"
+      >
+        <RunConfigTile :flow-run="flowRun" />
+      </v-tab-item>
+
+      <v-tab-item
+        class="tab-full-height"
         value="artifacts"
         transition="tab-fade"
         reverse-transition="tab-fade"
@@ -398,6 +414,11 @@ export default {
       <v-btn @click="tab = 'logs'">
         Logs
         <v-icon>format_align_left</v-icon>
+      </v-btn>
+
+      <v-btn @click="tab = 'run_config'">
+        Run Config
+        <v-icon>fas fa-cogs</v-icon>
       </v-btn>
 
       <v-btn @click="tab = 'artifacts'">

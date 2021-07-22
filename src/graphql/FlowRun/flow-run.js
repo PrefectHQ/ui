@@ -29,6 +29,7 @@ export default function(isCloud) {
         flow_id
         name
         parameters
+        run_config
         scheduled_start_time
         start_time
         state
