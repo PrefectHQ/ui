@@ -32,13 +32,19 @@ function notExpired(expiry) {
 let errors = 0,
   apiErrors = 0
 
+const { VUE_APP_REQUEST_CREDENTIALS_MODE: credentials } = process.env
+
 const batchLink = new BatchHttpLink({
   batchMax: 25,
   batchInterval: 2000,
+  credentials,
   uri: () => store.getters['api/url']
 })
 
-const httpLink = new HttpLink({ uri: () => store.getters['api/url'] })
+const httpLink = new HttpLink({
+  credentials,
+  uri: () => store.getters['api/url']
+})
 
 // Resets the cache and stops requests if
 // the backend has changed

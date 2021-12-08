@@ -4,7 +4,7 @@
 
 ### Features and Improvements
 
-- None
+- Allow the UI to include credentials when making requests to the server - [#1149](https://github.com/PrefectHQ/ui/pull/1149)
 
 ### Bugfixes
 
@@ -85,7 +85,7 @@
 ### Features and Improvements
 
 - Add a copy method to task run result locations - [#1033](https://github.com/PrefectHQ/ui/pull/1033)
-- Route to task run page on timeline click - [#1024](https://github.com/PrefectHQ/ui/pull/1024
+- Route to task run page on timeline click - [#1024](https://github.com/PrefectHQ/ui/pull/1024)
 - Fix artifact title overlap - [#1032](https://github.com/PrefectHQ/ui/pull/1032)
 - Increase default number of flows shown in the flow table - [#1027](https://github.com/PrefectHQ/ui/pull/1027)
 - Remove global max width on dashboard etc screens - [#1026](https://github.com/PrefectHQ/ui/pull/1026)
@@ -714,7 +714,7 @@
 - Add section to flow details for `flow.run_config` if not null, otherwise display `flow.environment` [#307](https://github.com/PrefectHQ/ui/pull/307)
 - Enable restart from cancelled and update restart from failed [#234](https://github.com/PrefectHQ/ui/pull/234)
 - Add unit tests for the authNavGuard middleware [#266](https://github.com/PrefectHQ/ui/pull/266)
-- Update label edit and label warning to use flow run labels (#300)[https://github.com/PrefectHQ/ui/pull/300]
+- Update label edit and label warning to use flow run labels [#300](https://github.com/PrefectHQ/ui/pull/300)
 - Display task run names on flow run page and task run page [#302](https://github.com/PrefectHQ/ui/pull/302)
 
 ### Bugfixes
